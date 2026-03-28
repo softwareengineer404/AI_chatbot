@@ -75,5 +75,33 @@ body {
     flex-direction: column;
     
 }
+.chat-body .message {
+   display: flex;
+   gap: 11px;
+   align-items: center;
+}
+
+.avatar {
+     height: 45px;
+    width: 45px;
+    padding: 6px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 50px; 
+    display: flex;
+}
+.chat-body .message .message-text {
+    paddinig: 12px 16px;
+    max-width: 75%;
+    font-size: 0.95rem;
+    background: #F2F2FF;
+}
+.chat-body .user-message {
+    flex-direction: column;
+    align-items: flex-end;
+}
+.chat-footer {
+    position: absolute;
+}
 
 

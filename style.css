@@ -96,6 +96,15 @@ body {
     font-size: 0.95rem;
     background: #F2F2FF;
 }
+.chat-body .bot-message .message-text {
+    background: #F2F2FF;
+    border-radius: 13px 13px 13px 13px;
+}
+.chat-body .user-message .message-text {
+    color: #fff;
+    background: #5350c4;
+    border-radius: 13px 13px 13px 13px;
+}
 .chat-body .user-message {
     flex-direction: column;
     align-items: flex-end;

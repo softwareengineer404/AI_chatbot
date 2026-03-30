@@ -15,6 +15,7 @@ body {
 
 }
 .chatbot-popup {
+    position: relative;
     width: 420px;
     background: #fff;
     overflow: hidden;
@@ -152,6 +153,27 @@ body {
 }
 .chat-footer {
     position: absolute;
+    bottom: 0;
+    width: 100%
+    background: #fff;
+    padding: 15px 22px 20px;
+}
+.chat-footer .chat-form {
+    display: flex;
+    align-items: center;;
+    background: #fff;
+    border-radius: 32px;
+    outline: 1px solid #CCCCES;
+
+}
+.chat-form .message-input {
+
+    outline: none;
+    height: 47px;
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 14px 0 13px 18px;
+    border-radius: inherit;
 }
 
 

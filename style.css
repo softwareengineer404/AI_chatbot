@@ -202,7 +202,11 @@ body {
 }
 .chat-form .chat-controls #send-message {
     color: #fff;
+    display: none;
     background: #5350c4;
+}
+.chat-form .message-input:valid ~ .chat-controls #send-message {
+    display: block;
 }
 .chat-form .chat-controls #send-message:hover {
     background: #3d39ac;

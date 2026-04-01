@@ -31,9 +31,9 @@ const handleOutgoingMessage = (e) => {
                         <div class="dot">.</div>
                     </div>
                 </div>`;
-        const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
-        outgoingMessageDiv.querySelector(".message-text").textContent = userData.message;
-        chatbody.appendChild(outgoingMessageDiv);
+        const incomingMessageDiv = createMessageElement(messageContent, "bot-message");
+        incomingMessageDiv.querySelector(".message-text").textContent = userData.message;
+        chatbody.appendChild(incomingMessageDiv);
     }, 600);
 }
 messageInput.addEventListener("keydown", (e) => {

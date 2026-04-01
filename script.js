@@ -1,6 +1,7 @@
 
 const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
+const sendMessageButton = document.querySelector("#send-message");
 //create message element with dynamic classes and return it 
 const createMessageElement = (content, classes) => {
     const div = document.createElement("div");
@@ -8,17 +9,22 @@ const createMessageElement = (content, classes) => {
     div.innerHTML = content;
     return div;
 }
+//handle outgoing user message
 const handleOutgoingMessage = (userMessage) => {
+    //create display user message
     const messageContent = `<div class="message-text">${userMessage}</div>`;
-    const outgoingMessageDiv = (messageContent, "user-message");
+    const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
     chatbody.appendChild(outgoingMessageDiv);
 }
-// handle enter key press for sending messages
 messageInput.addEventListener("keydown", (e) => {
-    const userMessage = e.target.value.trim();
-    if (e.key === "Enter" && userMessage) {
-        console.log(userMessage);
-        handleOutgoingMessage(userMessage);
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
 
+        const userMessage = messageInput.value.trim();
+
+        if (userMessage) {
+            handleOutgoingMessage(userMessage);
+            messageInput.value = "";
+        }
     }
-})
+});

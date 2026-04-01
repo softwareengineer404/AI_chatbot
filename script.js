@@ -16,11 +16,25 @@ const createMessageElement = (content, classes) => {
 const handleOutgoingMessage = (e) => {
     e.preventDefault();
     userData.message = messageInput.value.trim();
+    messageInput.value = "";
     //create display user message
     const messageContent = `<div class="message-text"></div>`;
     const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
     outgoingMessageDiv.querySelector(".message-text").textContent = userData.message;
     chatbody.appendChild(outgoingMessageDiv);
+    setTimeout(() => {
+        const messageContent = `<div class="message-text"><img src="image copy.png" class="avatar">
+                <div class="message-text">
+                    <div class="thinking-indicator">
+                        <div class="dot">.</div>
+                        <div class="dot">.</div>
+                        <div class="dot">.</div>
+                    </div>
+                </div>`;
+        const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
+        outgoingMessageDiv.querySelector(".message-text").textContent = userData.message;
+        chatbody.appendChild(outgoingMessageDiv);
+    }, 600);
 }
 messageInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {

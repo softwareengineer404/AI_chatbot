@@ -17,8 +17,9 @@ const handleOutgoingMessage = (e) => {
     e.preventDefault();
     userData.message = messageInput.value.trim();
     //create display user message
-    const messageContent = `<div class="message-text">${userMessage}</div>`;
+    const messageContent = `<div class="message-text"></div>`;
     const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
+    outgoingMessageDiv.querySelector(".message-text").textContent = userData.message;
     chatbody.appendChild(outgoingMessageDiv);
 }
 messageInput.addEventListener("keydown", (e) => {

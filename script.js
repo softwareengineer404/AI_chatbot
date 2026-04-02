@@ -14,6 +14,7 @@ const createMessageElement = (content, ...classes) => {
     div.innerHTML = content;
     return div;
 }
+//generate bot response using API 
 const generateBotResponse = async () => {
     const requestOptions = {
         method: "POST",
@@ -25,10 +26,11 @@ const generateBotResponse = async () => {
         })
     }
     try {
+        //fetch bot response from API
         const response = await fetch(API_url, requestOptions);
         const data = await response.json();
         if(!response.ok)  throw new Error(data.error.message);
-        console.log(data);
+        const apiResponceText = data.candidates[0].content.parts[0].text.trim()
 
     } catch (error) {
         console.log(error);
@@ -57,7 +59,7 @@ const handleOutgoingMessage = (e) => {
                 </div>`;
         const incomingMessageDiv = createMessageElement(messageContent, "bot-message", "thinking");
         chatbody.appendChild(incomingMessageDiv);
-        generateBotResponse();
+        generateBotResponse(incomingMessageDiv);
     }, 600);
 }
 messageInput.addEventListener("keydown", (e) => {

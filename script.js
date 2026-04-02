@@ -6,9 +6,9 @@ const userData = {
     message: null
 }
 //create message element with dynamic classes and return it 
-const createMessageElement = (content, classes) => {
+const createMessageElement = (content, ...classes) => {
     const div = document.createElement("div");
-    div.classList.add("message", classes);
+    div.classList.add("message", ...classes);
     div.innerHTML = content;
     return div;
 }
@@ -31,7 +31,7 @@ const handleOutgoingMessage = (e) => {
                         <div class="dot">.</div>
                     </div>
                 </div>`;
-        const incomingMessageDiv = createMessageElement(messageContent, "bot-message");
+        const incomingMessageDiv = createMessageElement(messageContent, "bot-message", "thinking");
         chatbody.appendChild(incomingMessageDiv);
     }, 600);
 }

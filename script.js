@@ -2,7 +2,8 @@
 const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
-const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key=$GOOGLE_API_KEY`;
+const API_key = "AIzaSyCBUyT14pTPddBN5uRdTMgCgZqYGa53yHY";
+const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key=${API_KEY}`;
 const userData = {
     message: null
 }
@@ -13,7 +14,26 @@ const createMessageElement = (content, ...classes) => {
     div.innerHTML = content;
     return div;
 }
-const generateBotResponse = () => {
+const generateBotResponse = async () => {
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            contents: [{
+                parts: [ {text: userData.message} ]
+            }]
+        })
+    }
+    try {
+        const response = await fetch(API_url, requestOptions);
+        const data = await response.json();
+        if(!response.ok)  throw new Error(data.error.message);
+        console.log(data);
+
+    } catch (error) {
+        console.log(error);
+
+    }
 
 }
 //handle outgoing user message

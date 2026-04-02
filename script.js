@@ -32,7 +32,6 @@ const handleOutgoingMessage = (e) => {
                     </div>
                 </div>`;
         const incomingMessageDiv = createMessageElement(messageContent, "bot-message");
-        incomingMessageDiv.querySelector(".message-text").textContent = userData.message;
         chatbody.appendChild(incomingMessageDiv);
     }, 600);
 }

@@ -15,7 +15,8 @@ const createMessageElement = (content, ...classes) => {
     return div;
 }
 //generate bot response using API 
-const generateBotResponse = async () => {
+const generateBotResponse = async (incomingMessageDiv) => {
+    const messageElement = incomingMessageDiv.querySelector(".message-text");
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,7 +31,9 @@ const generateBotResponse = async () => {
         const response = await fetch(API_url, requestOptions);
         const data = await response.json();
         if(!response.ok)  throw new Error(data.error.message);
-        const apiResponceText = data.candidates[0].content.parts[0].text.trim()
+        //extract and display bot response text
+        const apiResponceText = data.candidates[0].content.parts[0].text.trim();
+        messageElement.innerText = apiResponseText;
 
     } catch (error) {
         console.log(error);

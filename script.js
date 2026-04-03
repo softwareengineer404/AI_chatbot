@@ -2,8 +2,8 @@
 const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
-const API_KEY = "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";
-const API_url =  `https://api.openai.com/v1/chat/completions`;
+const API_KEY = "AIzaSyCBUyT14pTPddBN5uRdTMgCgZqYGa53yHY";
+const API_url =  `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key=${API_KEY}`;
 const userData = {
     message: null
 }
@@ -25,12 +25,11 @@ const generateBotResponse = async (incomingMessageDiv) => {
             "Authorization": `Bearer ${API_KEY}`
         },
         body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            //contents: [{
-            //   parts: [ {text: userData.message} ]
-            //}]
-            messages: [{ role: "user", content: userData.message }],
-            temperature: 0.7,
+            
+            contents: [{
+               parts: [ {text: userData.message} ]
+            }]
+            
         })
     }
     try {

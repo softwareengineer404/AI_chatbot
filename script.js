@@ -2,8 +2,8 @@
 const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
-const API_KEY = "AIzaSyCBUyT14pTPddBN5uRdTMgCgZqYGa53yHY";
-const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key=${API_KEY}`;
+const API_KEY = "AIzaSyCGhS09QgPILsZCz8DKPpj-irY9A9N8ouU";
+const API_url =  `https://generativelanguage.googleapis.com/v1/models/gemini-1.0-pro:generateContent?key=${API_KEY}`;
 const userData = {
     message: null
 }
@@ -38,6 +38,8 @@ const generateBotResponse = async (incomingMessageDiv) => {
     } catch (error) {
         console.log(error);
 
+    } finally {
+        incomingMessageDiv.classList.remove("thinking");
     }
 
 }

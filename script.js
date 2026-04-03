@@ -2,8 +2,8 @@
 const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
-const API_KEY = "AIzaSyCGhS09QgPILsZCz8DKPpj-irY9A9N8ouU";
-const API_url =  `https://generativelanguage.googleapis.com/v1/models/gemini-1.0-pro:generateContent?key=${API_KEY}`;
+const API_KEY = "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";
+const API_url =  `https://api.openai.com/v1/chat/completions`;
 const userData = {
     message: null
 }
@@ -14,16 +14,23 @@ const createMessageElement = (content, ...classes) => {
     div.innerHTML = content;
     return div;
 }
-//generate bot response using API 
+//generate bot response using API
+
 const generateBotResponse = async (incomingMessageDiv) => {
     const messageElement = incomingMessageDiv.querySelector(".message-text");
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        },
         body: JSON.stringify({
-            contents: [{
-                parts: [ {text: userData.message} ]
-            }]
+            model: "gpt-3.5-turbo",
+            //contents: [{
+            //   parts: [ {text: userData.message} ]
+            //}]
+            messages: [{ role: "user", content: userData.message }],
+            temperature: 0.7,
         })
     }
     try {

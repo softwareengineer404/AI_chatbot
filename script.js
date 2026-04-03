@@ -39,7 +39,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
         const data = await response.json();
         if(!response.ok)  throw new Error(data.error.message);
         //extract and display bot response text
-        const apiResponseText = data.candidates[0].content.parts[0].text.trim();
+        const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1).trim();
         messageElement.innerText = apiResponseText;
 
     } catch (error) {

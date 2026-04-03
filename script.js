@@ -2,7 +2,7 @@
 const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
-const API_key = "AIzaSyCBUyT14pTPddBN5uRdTMgCgZqYGa53yHY";
+const API_KEY = "AIzaSyCBUyT14pTPddBN5uRdTMgCgZqYGa53yHY";
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key=${API_KEY}`;
 const userData = {
     message: null
@@ -32,7 +32,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
         const data = await response.json();
         if(!response.ok)  throw new Error(data.error.message);
         //extract and display bot response text
-        const apiResponceText = data.candidates[0].content.parts[0].text.trim();
+        const apiResponseText = data.candidates[0].content.parts[0].text.trim();
         messageElement.innerText = apiResponseText;
 
     } catch (error) {
@@ -52,14 +52,16 @@ const handleOutgoingMessage = (e) => {
     outgoingMessageDiv.querySelector(".message-text").textContent = userData.message;
     chatbody.appendChild(outgoingMessageDiv);
     setTimeout(() => {
-        const messageContent = `<div class="message-text"><img src="image copy.png" class="avatar">
-                <div class="message-text">
-                    <div class="thinking-indicator">
-                        <div class="dot">.</div>
-                        <div class="dot">.</div>
-                        <div class="dot">.</div>
-                    </div>
-                </div>`;
+        const messageContent = `
+            <img src="image copy.png" class="avatar">
+            <div class="message-text">
+                <div class="thinking-indicator">
+                    <div class="dot">.</div>
+                    <div class="dot">.</div>
+                    <div class="dot">.</div>
+                </div>
+            </div>
+        `;
         const incomingMessageDiv = createMessageElement(messageContent, "bot-message", "thinking");
         chatbody.appendChild(incomingMessageDiv);
         generateBotResponse(incomingMessageDiv);

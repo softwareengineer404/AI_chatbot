@@ -1,9 +1,7 @@
-
 const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
 
-const API_KEY = process.env.API_KEY;
 const API_url =  `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key=${API_KEY}`;
 const userData = {
     message: null
@@ -25,25 +23,20 @@ const generateBotResponse = async (incomingMessageDiv) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            
-            contents: [{
-               parts: [ {text: userData.message} ]
-            }]
-            
+            message: userData.message
         })
     }
     try {
         //fetch bot response from API
         const response = await fetch(API_url, requestOptions);
         const data = await response.json();
-        if(!response.ok)  throw new Error(data.error.message);
-        //extract and display bot response text
+        if (!response.ok) throw new Error(data.error?.message || 'Request failed');
         const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
         messageElement.innerText = apiResponseText;
 
     } catch (error) {
-        console.log(error);
-
+        console.error(error);
+        messageElement.innerText = "Sorry, something went wrong.";
     } finally {
         incomingMessageDiv.classList.remove("thinking");
     }

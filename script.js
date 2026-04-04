@@ -57,6 +57,7 @@ const handleOutgoingMessage = (e) => {
     const outgoingMessageDiv = createMessageElement(messageContent, "user-message");
     outgoingMessageDiv.querySelector(".message-text").textContent = userData.message;
     chatbody.appendChild(outgoingMessageDiv);
+    chatbody.scrollTo({ top: chatbody.scrollHeight, behavior: "smooth" })
     setTimeout(() => {
         const messageContent = `
             <img src="image copy.png" class="avatar">

@@ -44,6 +44,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
         messageElement.innerText = "Sorry, something went wrong.";
     } finally {
         incomingMessageDiv.classList.remove("thinking");
+        chatbody.scrollTo({ top: chatbody.scrollHeight, behavior: "smooth" });
     }
 
 }
@@ -71,6 +72,7 @@ const handleOutgoingMessage = (e) => {
         `;
         const incomingMessageDiv = createMessageElement(messageContent, "bot-message", "thinking");
         chatbody.appendChild(incomingMessageDiv);
+        chatbody.scrollTo({ top: chatbody.scrollHeight, behavior: "smooth" });
         generateBotResponse(incomingMessageDiv);
     }, 600);
 }

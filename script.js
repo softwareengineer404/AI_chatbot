@@ -2,6 +2,7 @@ const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
 const fileInput = document.querySelector("#file-input");
+const API_KEY = "AIzaSyBprV4NS66PyiUCvU-ecOmjVpueLI58LaI";
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 const userData = {
     message: null
@@ -89,6 +90,15 @@ messageInput.addEventListener("keydown", (e) => {
             messageInput.value = "";
         }
     }
+});
+fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        console.log(e.target.result);
+    }
+    reader.readAsDataURL(file);
 });
 sendMessageButton.addEventListener("click", (e) => handleOutgoingMessage(e));
 document.querySelector("#file-upload").addEventListener("click", () => fileInput.click());

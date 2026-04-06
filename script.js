@@ -3,6 +3,7 @@ const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
 const fileInput = document.querySelector("#file-input");
 const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
+const fileCancelButton = document.querySelector("#file-cancel");
 
 
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
@@ -136,6 +137,11 @@ fileInput.addEventListener("change", () => {
     };
     reader.readAsDataURL(file);
 });
+//cancel file upload
+fileCancelButton.addEventListener("click", () => {
+    userData.file = {};
+    fileUploadWrapper.classList.remove("file-uploaded");
+})
 
 // File upload button triggers hidden file input
 document.querySelector("#file-upload").addEventListener("click", () => fileInput.click());

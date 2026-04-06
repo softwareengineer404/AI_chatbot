@@ -2,6 +2,7 @@ const chatbody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".message-input");
 const sendMessageButton = document.querySelector("#send-message");
 const fileInput = document.querySelector("#file-input");
+const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 
 
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
@@ -124,6 +125,7 @@ fileInput.addEventListener("change", () => {
 
     const reader = new FileReader();
     reader.onload = (e) => {
+        fileUploadWrapper.querySelector("img").src = e.target.result;
         const base64String = e.target.result.split(",")[1];
         userData.file = {
             data: base64String,

@@ -118,7 +118,7 @@ messageInput.addEventListener("keydown", (e) => {
     }
 });
 
-// Handle file input change
+// Handle file input change and preview the selected file
 fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
     if (!file) return;
@@ -126,6 +126,7 @@ fileInput.addEventListener("change", () => {
     const reader = new FileReader();
     reader.onload = (e) => {
         fileUploadWrapper.querySelector("img").src = e.target.result;
+        fileUploadWrapper.classList.add("file-uploaded");
         const base64String = e.target.result.split(",")[1];
         userData.file = {
             data: base64String,

@@ -5,7 +5,6 @@ const fileInput = document.querySelector("#file-input");
 const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 const fileCancelButton = document.querySelector("#file-cancel");
 
-
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const userData = {
@@ -73,6 +72,7 @@ const handleOutgoingMessage = (e) => {
     e.preventDefault();
     userData.message = messageInput.value.trim();
     if (!userData.message && !userData.file.data) return;
+    fileUploadWrapper.classList.remove("file-uploaded");
 
     const messageContent = `
         <div class="message-text">${userData.message || ""}</div>

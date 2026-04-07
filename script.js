@@ -141,7 +141,14 @@ fileInput.addEventListener("change", () => {
 fileCancelButton.addEventListener("click", () => {
     userData.file = {};
     fileUploadWrapper.classList.remove("file-uploaded");
-})
+});
+//initilase emoji picker
+const picker = new EmojiMart.Picker({
+    theme: "light",
+    skinTonePosition: "none",
+    previewPosition: "none",
+});
+document.querySelector(".chat-form").appendChild(picker);
 
 // File upload button triggers hidden file input
 document.querySelector("#file-upload").addEventListener("click", () => fileInput.click());

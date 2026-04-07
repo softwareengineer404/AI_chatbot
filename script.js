@@ -4,7 +4,6 @@ const sendMessageButton = document.querySelector("#send-message");
 const fileInput = document.querySelector("#file-input");
 const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 const fileCancelButton = document.querySelector("#file-cancel");
-
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const userData = {
@@ -142,12 +141,17 @@ fileCancelButton.addEventListener("click", () => {
     userData.file = {};
     fileUploadWrapper.classList.remove("file-uploaded");
 });
-//initilase emoji picker
+//initialize emoji picker and handle emoji selection
 const picker = new EmojiMart.Picker({
     theme: "light",
     skinTonePosition: "none",
     previewPosition: "none",
-    onClickOutSide: () => {
+    onEmojiSelect: (emoji) => {
+        const { selectionStart: start, selectionEnd: end } = messageInput;
+        messageInput.setRangeText(emoji.native, start, end, "end");
+        messageInput.focus();
+    },
+    onClickOutside: (e) => {
         if(e.target.id === "emoji-picker") {
             document.body.classList.toggle("show-emoji-picker");
         } else {

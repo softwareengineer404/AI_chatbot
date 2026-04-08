@@ -4,6 +4,7 @@ const sendMessageButton = document.querySelector("#send-message");
 const fileInput = document.querySelector("#file-input");
 const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 const fileCancelButton = document.querySelector("#file-cancel");
+const chatbotToggler = document.querySelector("#chatbot-toggler");
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const userData = {
@@ -166,3 +167,4 @@ document.querySelector("#file-upload").addEventListener("click", () => fileInput
 
 // Send button click
 sendMessageButton.addEventListener("click", (e) => handleOutgoingMessage(e));
+chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));

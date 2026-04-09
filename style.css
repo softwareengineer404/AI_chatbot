@@ -24,6 +24,7 @@ body {
     justify-content: center;
     border-radius: 50%;
     background: #5350c4;
+    transition: all 0.2s ease;
 
 
 }
@@ -225,10 +226,17 @@ body.show-chatbot .chatbot-popup {
     height: 47px;
     width: 100%;
     resize: none;
+    max-height: 180px;
+    white-space: pre-line;
     font-size: 0.95rem;
     padding: 14px 0 13px 18px;
     border-radius: none;
     border: none;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+.chat-form .message-input:hover {
+    scrollbar-color: #ccccf5 transparent;
 }
 .chat-form .chat-controls {
     display: flex;

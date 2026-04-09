@@ -15,6 +15,7 @@ const userData = {
         mime_type: null
     }
 };
+const initialInputHeight = messageInput.scrollHeight;
 
 // Create message element with dynamic classes
 const createMessageElement = (content, ...classes) => {
@@ -119,6 +120,10 @@ messageInput.addEventListener("keydown", (e) => {
         handleOutgoingMessage(e);
     }
 });
+messageInput.addEventListener("input", () => {
+    messageInput.style.height = `${initialInputHeight}px`;
+    messageInput.style.height = `${messageInput.scrollHeight}px`;
+})
 
 // Handle file input change and preview the selected file
 fileInput.addEventListener("change", () => {

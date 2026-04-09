@@ -15,6 +15,7 @@ const userData = {
         mime_type: null
     }
 };
+const chatHistory = [];
 const initialInputHeight = messageInput.scrollHeight;
 
 // Create message element with dynamic classes
@@ -28,6 +29,10 @@ const createMessageElement = (content, ...classes) => {
 // Generate bot response using API
 const generateBotResponse = async (incomingMessageDiv) => {
     const messageElement = incomingMessageDiv.querySelector(".message-text");
+    chatHistory.push({
+        role: "user",
+        parts: [{ text: userData.message },...API_url(userData.file.data ? [{ inline_data: userData.file }] : [])]
+    })
 
     // Prepare API payload
     const parts = [{ text: userData.message }];
@@ -75,6 +80,7 @@ const handleOutgoingMessage = (e) => {
     userData.message = messageInput.value.trim();
     if (!userData.message && !userData.file.data) return;
     fileUploadWrapper.classList.remove("file-uploaded");
+    messageInput.dispatchEvent(new Event("input"));
 
     const messageContent = `
         <div class="message-text">${userData.message || ""}</div>
@@ -115,7 +121,7 @@ const handleOutgoingMessage = (e) => {
 
 // Send message on Enter key
 messageInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && userMessage && !e.shiftKey && window.innerWidth > 768) {
         e.preventDefault();
         handleOutgoingMessage(e);
     }

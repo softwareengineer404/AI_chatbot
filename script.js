@@ -120,9 +120,12 @@ messageInput.addEventListener("keydown", (e) => {
         handleOutgoingMessage(e);
     }
 });
+//adjust input field height dyanamically
 messageInput.addEventListener("input", () => {
     messageInput.style.height = `${initialInputHeight}px`;
     messageInput.style.height = `${messageInput.scrollHeight}px`;
+    document.querySelector(".chat-form").styale.borderRadius = messageInput.scrollHeight >
+    initialInputHeight ? "15px" : "32px";
 })
 
 // Handle file input change and preview the selected file

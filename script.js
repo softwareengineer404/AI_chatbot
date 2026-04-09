@@ -5,7 +5,8 @@ const fileInput = document.querySelector("#file-input");
 const fileUploadWrapper = document.querySelector(".file-upload-wrapper");
 const fileCancelButton = document.querySelector("#file-cancel");
 const chatbotToggler = document.querySelector("#chatbot-toggler");
-const closeChatbot = document.querySelector("#close-chatbot")
+const closeChatbot = document.querySelector("#close-chatbot");
+const API_KEY = "AIzaSyB6ZT2pupz1aFx66M5zrwLafKOUKA2tz7s";
 const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const userData = {
@@ -31,8 +32,8 @@ const generateBotResponse = async (incomingMessageDiv) => {
     const messageElement = incomingMessageDiv.querySelector(".message-text");
     chatHistory.push({
         role: "user",
-        parts: [{ text: userData.message },...API_url(userData.file.data ? [{ inline_data: userData.file }] : [])]
-    })
+        parts: [{ text: userData.message }]
+});
 
     // Prepare API payload
     const parts = [{ text: userData.message }];
@@ -121,7 +122,7 @@ const handleOutgoingMessage = (e) => {
 
 // Send message on Enter key
 messageInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && userMessage && !e.shiftKey && window.innerWidth > 768) {
+    if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         handleOutgoingMessage(e);
     }
@@ -130,7 +131,7 @@ messageInput.addEventListener("keydown", (e) => {
 messageInput.addEventListener("input", () => {
     messageInput.style.height = `${initialInputHeight}px`;
     messageInput.style.height = `${messageInput.scrollHeight}px`;
-    document.querySelector(".chat-form").styale.borderRadius = messageInput.scrollHeight >
+    document.querySelector(".chat-form").style.borderRadius = messageInput.scrollHeight >
     initialInputHeight ? "15px" : "32px";
 })
 
@@ -154,8 +155,11 @@ fileInput.addEventListener("change", () => {
 });
 //cancel file upload
 fileCancelButton.addEventListener("click", () => {
-    userData.file = {};
+    userData.file = { data: null, mime_type: null };
     fileUploadWrapper.classList.remove("file-uploaded");
+    const img = fileUploadWrapper.querySelector("img");
+    img.src = "";
+    fileInput.value = ""; // reset file input
 });
 //initialize emoji picker and handle emoji selection
 const picker = new EmojiMart.Picker({

@@ -285,13 +285,14 @@ body.show-chatbot .chatbot-popup {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+    display: block;
 }
 .chat-form .file-upload-wrapper #file-cancel {
     color: #ff0000;
     background: #fff;
 
 }
-.chat.form .file-upload-wrapper :where(img, #file-cancel),
+.chat-form .file-upload-wrapper :where(img, #file-cancel),
 .chat-form .file-upload-wrapper .file-uploaded #file-upload {
     display:none
    ;
